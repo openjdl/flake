@@ -1,5 +1,5 @@
 {
-  "name": "@openjdl/flake-designer",
+  "name": "@openjdl/flake-engine",
   "version": "0.1.0",
   "scripts": {
     "dev": "vite",
