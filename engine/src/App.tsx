@@ -1,15 +1,15 @@
 import { ErrorBoundary } from "@sentry/react";
-import FlakeAppComponent from "./app/FlakeAppComponent.tsx";
-import FlakeDesignerComponent from "./designer/FlakeDesignerComponent.tsx";
+import AppComponent from "./app/AppComponent.tsx";
+import DesignerComponent from "./designer/DesignerComponent.tsx";
 
 function App() {
   const appId: string = "tmp";
 
   return (
     <ErrorBoundary>
-      <FlakeAppComponent appId={appId}>
-        <FlakeDesignerComponent />
-      </FlakeAppComponent>
+      <AppComponent appId={appId}>
+        <DesignerComponent />
+      </AppComponent>
     </ErrorBoundary>
   );
 }

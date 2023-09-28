@@ -22,4 +22,6 @@ export type FlakeDesigner = {
   readonly selecting: IDesignerSelecting;
   readonly resizing: IDesignerResizing;
   readonly component: IDesignerComponent;
+
+  debugPrint(): void;
 };

@@ -19,7 +19,7 @@ export type Props = PropsWithChildren<{
   appId: string;
 }>;
 
-const FlakeAppComponent: React.FC<Props> = ({ appId, children }) => {
+const AppComponent: React.FC<Props> = ({ appId, children }) => {
   const debugging = useMemo<boolean>(
     () => window.localStorage.getItem("__debug") !== null,
     [],
@@ -213,4 +213,4 @@ const FlakeAppComponent: React.FC<Props> = ({ appId, children }) => {
   );
 };
 
-export default FlakeAppComponent;
+export default AppComponent;

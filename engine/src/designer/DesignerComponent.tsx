@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import { useApp } from "../app/AppContext.tsx";
 import { DesignerContext } from "./DesignerContext.tsx";
 import {
@@ -21,8 +21,9 @@ import { useDesignerDragging } from "./useDesignerDragging.ts";
 import { useDesignerSelecting } from "./useDesignerSelecting.ts";
 import { useDesignerResizing } from "./useDesignerResizing.ts";
 import { useDesignerComponent } from "./useDesignerComponent.ts";
+import DesignerHeader from "./DesignerHeader.tsx";
 
-const FlakeDesignerComponent: React.FC = () => {
+const DesignerComponent: React.FC = () => {
   const app = useApp();
   const [, setViewport, viewportSize] = app.useViewport();
   const [previewing, setPreviewing] = useState<boolean>(false);
@@ -50,6 +51,12 @@ const FlakeDesignerComponent: React.FC = () => {
   const resizing: IDesignerResizing = useDesignerResizing();
   const component: IDesignerComponent = useDesignerComponent(app, selecting);
   const saving: boolean = false; // TODO: code.saving
+
+  const debugPrint = useCallback(() => {
+    app.debugPrint();
+
+    // TODO: designer 数据
+  }, [app]);
 
   designerRef.current = useMemo(
     () => ({
@@ -97,6 +104,7 @@ const FlakeDesignerComponent: React.FC = () => {
       selecting,
       resizing,
       component,
+      debugPrint,
     }),
     [
       app,
@@ -113,6 +121,7 @@ const FlakeDesignerComponent: React.FC = () => {
       selecting,
       resizing,
       component,
+      debugPrint,
     ],
   );
 
@@ -133,11 +142,13 @@ const FlakeDesignerComponent: React.FC = () => {
             </Text>
           </Center>
         ) : (
-          <p>TODO: content</p>
+          <>
+            <DesignerHeader />
+          </>
         )}
       </div>
     </DesignerContext.Provider>
   );
 };
 
-export default FlakeDesignerComponent;
+export default DesignerComponent;
