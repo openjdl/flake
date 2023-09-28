@@ -1,4 +1,4 @@
-import { LayoutMode } from "./engine-typings.ts";
+import { LayoutMode } from "./app-typings.ts";
 
 export type LayoutConstantsType = {
   name: string;
@@ -40,7 +40,7 @@ export type DesignerConstantsType = {
   zSplitter: number;
 }
 
-export type EngineConstantsType = {
+export type ConstantsType = {
   layout: Record<LayoutMode, LayoutConstantsType>;
   column: ColumnConstantsType;
   row: RowConstantsType;

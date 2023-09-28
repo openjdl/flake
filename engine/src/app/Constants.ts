@@ -1,10 +1,9 @@
-import { EngineConstantsType } from "../typings/constants-typings.ts";
-import { LayoutMode } from "../typings";
+import { ConstantsType, LayoutMode } from "../typings";
 
 export const ColumnStep: number = 12;
 export const RowHeight: number = 10;
 
-export const EngineConstants: EngineConstantsType = {
+export const Constants: ConstantsType = {
   layout: {
     [LayoutMode.Fluid]: {
       name: "宽屏",

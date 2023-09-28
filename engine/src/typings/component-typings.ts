@@ -1,6 +1,6 @@
 import React from "react";
-import {FlakeRect, FlakeSize, Properties} from "./common-typings.ts";
-import {Engine} from "./engine-typings.ts";
+import { FlakeRect, FlakeSize, Properties } from "./common-typings.ts";
+import { FlakeApp } from "./app-typings.ts";
 
 export type ComponentDefinition = {
   type: string;
@@ -9,46 +9,55 @@ export type ComponentDefinition = {
   minSize: FlakeSize;
   runtime(): React.ReactNode;
   offCanvas?: boolean;
-}
+};
 
 export type ComponentPro = {
-  update(): void;
-}
+  onUpdated(): void;
+};
 
 export type ComponentInstance = {
-  readonly id: string;
-  readonly version: number;
-  readonly name: number;
-  readonly parentId: string;
-  readonly layout: FlakeRect;
-  readonly brief: string;
-  readonly definition: ComponentDefinition;
-  readonly properties: Properties;
-  readonly pro?: ComponentPro;
-}
+  id: string;
+  version: number;
+  name: string;
+  parentId: string;
+  layout: FlakeRect;
+  brief: string;
+  definition: ComponentDefinition;
+  properties: Properties;
+  pro?: ComponentPro;
+};
 
 export type IComponent = {
   readonly version: number;
-  instances: [];
+
+  // definitions
+
+  readonly definitions: ComponentDefinition[];
+  register(definition: ComponentDefinition): void;
+  definitionOf(type: string): ComponentDefinition;
+
+  // instances
+
+  instances: ComponentInstance[];
 
   findById(id: string): ComponentInstance | null;
   findByName(name: string): ComponentInstance | null;
   findDescendants(id: string): ComponentInstance[];
   add(instance: ComponentInstance): void;
-  update(id: string): void;
   updateParent(id: string, parentId: string): void;
   remove(id: string): void;
 
+  onUpdated(id: string): void;
   onColumnsUpdated(parentId: string, prev: number, next: number): void;
 
   use(parentId?: string): ComponentInstance[];
   useById(id: string): ComponentInstance | null;
 
   createPro<T = {}>(instance: ComponentInstance, extensions?: T): ComponentPro;
-}
+};
 
 export type ComponentRenderProps = {
-  engine: Engine;
+  engine: FlakeApp;
   instance: ComponentInstance;
   size: FlakeSize;
-}
+};
